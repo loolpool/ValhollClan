@@ -85,6 +85,11 @@
         "role": "member"
     },
     {
+        "uuid": "09d50c95-d3e0-4147-b546-07d7fe12f24c",
+        "name": "_Shikimaru_mc",
+        "role": "member"
+    },
+    {
         "uuid": "3542efdb-f9fb-4e52-a3e3-c218965bcf5e",
         "name": "5i01",
         "role": "member"
@@ -117,6 +122,11 @@
     {
         "uuid": "cd5373ad-94b7-4ea4-8792-368a0f97d677",
         "name": "CatgirlBathWater",
+        "role": "member"
+    },
+    {
+        "uuid": "db9d7475-a6f3-4538-bfa7-263b8a2d1452",
+        "name": "CelosiaFox",
         "role": "member"
     },
     {
@@ -175,8 +185,8 @@
         "role": "member"
     },
     {
-        "uuid": "52136404-6089-4e20-9e22-bee7c2575b8a",
-        "name": "OutplayedMyself",
+        "uuid": "91cb55d7-06fb-45e8-bbfc-6a8f67ead97f",
+        "name": "loolidk",
         "role": "member"
     },
     {
@@ -187,11 +197,6 @@
     {
         "uuid": "e9c51ac4-35a2-4c31-a160-4354d8e03afa",
         "name": "MATH_TEXTBOOK",
-        "role": "member"
-    },
-    {
-        "uuid": "09d50c95-d3e0-4147-b546-07d7fe12f24c",
-        "name": "_Shikimaru_mc",
         "role": "member"
     },
     {
@@ -217,6 +222,11 @@
     {
         "uuid": "6eb52854-0deb-47e7-8c04-563e23a264bd",
         "name": "Noob_0mochi",
+        "role": "member"
+    },
+    {
+        "uuid": "52136404-6089-4e20-9e22-bee7c2575b8a",
+        "name": "OutplayedMyself",
         "role": "member"
     },
     {
