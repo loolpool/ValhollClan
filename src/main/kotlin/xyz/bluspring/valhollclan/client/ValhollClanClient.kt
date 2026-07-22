@@ -7,6 +7,7 @@ import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
 import net.fabricmc.fabric.api.client.command.v2.ClientCommands
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLevelEvents
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.ComponentUtils
@@ -101,12 +102,14 @@ class ValhollClanClient : ClientModInitializer {
         val players = mutableListOf<ClanPlayerInfo>()
 
         private fun loadWithFallback(path: String): String {
-            try {
-                val url = URI.create("$WEB_PATH/$path").toURL()
-                return url.readText(Charsets.UTF_8)
-            } catch (e: Throwable) {
-                logger.error("Failed to load URL for $path, using fallback!")
-                e.printStackTrace()
+            if (!FabricLoader.getInstance().isDevelopmentEnvironment) {
+                try {
+                    val url = URI.create("$WEB_PATH/$path").toURL()
+                    return url.readText(Charsets.UTF_8)
+                } catch (e: Throwable) {
+                    logger.error("Failed to load URL for $path, using fallback!")
+                    e.printStackTrace()
+                }
             }
 
             return this::class.java.getResource("/$path")?.readText(Charsets.UTF_8) ?: ""
@@ -128,6 +131,18 @@ class ValhollClanClient : ClientModInitializer {
 
             val members = ClanPlayerInfo.CODEC.listOf().decode(JsonOps.INSTANCE, JsonParser.parseString(loadWithFallback("clan_members.json"))).orThrow.first
             val targets = ClanPlayerInfo.CODEC.listOf().decode(JsonOps.INSTANCE, JsonParser.parseString(loadWithFallback("clan_targets.json"))).orThrow.first
+
+            if (FabricLoader.getInstance().isDevelopmentEnvironment) {
+                for (info in members.distinctBy { it.uuid }) {
+                    val duplicates = members.filter { it.uuid == info.uuid }
+                    if (duplicates.size > 1) {
+                        logger.error("Multiple of ${info.uuid} exists!")
+                        for (duplicate in duplicates) {
+                            logger.error(" - ${duplicate.name} (${duplicate.role})")
+                        }
+                    }
+                }
+            }
 
             players.addAll(members)
             players.addAll(targets)
